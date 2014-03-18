@@ -21,6 +21,10 @@ public class HowDoINetwork {
      */
     public static void main(String[] args) {
         
+        System.out.println("Running server");
+        
+        boolean alive = true;
+        
         final int portNumber = 55341;
         
         try {
@@ -28,7 +32,14 @@ public class HowDoINetwork {
             Socket clientSocket = myFirstServerSocket.accept();
             
             PrintWriter printWriter = new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            
+            System.out.println("Looks like we have a server now at port "+portNumber);
+            String outsideMessage = "";
+            
+            while (outsideMessage != "done") {
+                printWriter.println(outsideMessage);
+            }
         } catch(IOException e) {
             System.err.println("IO Exception: "+e.toString());
         } catch(SecurityException e) {
@@ -36,7 +47,6 @@ public class HowDoINetwork {
         } catch(Exception e) {
             System.err.println(e.toString());
         }
-        System.out.println("Looks like we have a server now at port "+portNumber);
         
     }
 }
