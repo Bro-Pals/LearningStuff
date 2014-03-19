@@ -36,10 +36,13 @@ public class HowDoINetwork {
             
             System.out.println("Looks like we have a server now at port "+portNumber);
             String outsideMessage = "";
-            
-            while (outsideMessage != "done") {
-                printWriter.println(outsideMessage);
+
+            while (outsideMessage != null) {
+                outsideMessage = reader.readLine();
+                System.out.println("From Client: "+outsideMessage);
             }
+            
+            System.out.println("finish!");
         } catch(IOException e) {
             System.err.println("IO Exception: "+e.toString());
         } catch(SecurityException e) {

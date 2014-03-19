@@ -41,14 +41,8 @@ public class HowDoIClientSide {
             PrintWriter writer = new PrintWriter(aSocket.getOutputStream(), true);
             BufferedReader reader = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
             
-            Scanner myScanner = new Scanner(System.in);
-            String readString = "Hello!";
-            
-            while (readString != "done") {
-                writer.write(readString);
-                readString = myScanner.next();
-                System.out.println("There was some scanner input!");
-            }
+            Thread client1 = new Thread(new MessageSender("Derp", writer));
+            client1.start();
             
             System.out.println("finish!");
         } catch(UnknownHostException e) {
